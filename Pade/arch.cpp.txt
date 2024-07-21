@@ -1,0 +1,200 @@
+#include <stdio.h>
+#include <conio.h>
+#include <stdlib.h>
+#include<math.h>
+
+#define MAX 5
+
+struct input_layer
+{
+	 float input ;
+	
+	 float mac_out ;
+} A_1_1,A_2_1,A_3_1 ;
+
+struct first_hidden_layer
+{
+	float input_H1;
+	float mac_out_H1;
+} B_1_2 , B_2_2 , B_3_2;
+//
+struct second_hidden_layer
+{
+	float input_H2;
+	float mac_out_H2;
+} C_1_3 , C_2_3 , C_3_3;
+
+float activation(float x)
+{
+	float scale_down = x/MAX;
+	float y = exp(scale_down)/(1+exp(scale_down)) ;
+	return y;
+}
+
+float pade(float x)
+{
+   
+    float scale_down = x/MAX;
+	float expp = (1680 + (840*scale_down) + (180*scale_down*scale_down))/(1680 - (840*scale_down) + (180*scale_down*scale_down));
+	float y = expp/(1+expp);
+	return y;
+}
+
+
+int main() 
+{
+ //structure input_layer A,B,C;
+
+
+
+
+ printf("enter 1 to for sigmoid 2 for pade");
+ int act;
+ scanf("%d",&act) ;
+ if(act == 1)
+ {
+ FILE * output_sigmoid_activation;
+output_sigmoid_activation = fopen("output_sigmoid_activation.txt", "w+");
+ 
+FILE * fp;
+fp = fopen("input.txt", "w+");
+printf("enter number of times you want input");
+int times;
+scanf("%d",&times);
+ float X1,X2,X3;
+int l_l;
+for(l_l=0;l_l<times;l_l++)
+{	
+scanf("%f",&A_1_1.input);
+ scanf("%f",&A_2_1.input);
+ scanf("%f",&A_3_1.input);
+
+fprintf(fp,"%f,%f,%f \n",A_1_1.input,A_2_1.input,A_3_1.input);
+
+}
+fclose(fp);
+fp = fopen("input.txt", "r");
+while(fscanf(fp,"%f,%f,%f \n",&X1,&X2,&X3) != EOF)
+{
+
+A_1_1.input = X1;
+A_2_1.input = X2;
+A_3_1.input = X3;
+
+printf("value of input at neuron A_1_1 is : %f \n",A_1_1.input) ; 
+printf("value of input at neuron A_2_1 is : %f \n",A_2_1.input) ; 
+printf("value of input at neuron A_3_1 is : %f \n",A_3_1.input) ; 
+
+fprintf(output_sigmoid_activation,"value of input at neuron A_1_1 is : %f\n",A_1_1.input);
+fprintf(output_sigmoid_activation,"value of input at neuron A_2_1 is : %f\n",A_2_1.input);
+fprintf(output_sigmoid_activation,"value of input at neuron A_3_1 is : %f\n",A_3_1.input);
+ 
+ B_1_2.input_H1 = activation(A_1_1.input) + activation(A_2_1.input) + activation(A_3_1.input) ;
+ B_2_2.input_H1 = activation(A_1_1.input) + activation(A_2_1.input) + activation(A_3_1.input) ;
+ B_3_2.input_H1 = activation(A_1_1.input) + activation(A_2_1.input) + activation(A_3_1.input) ;
+ 
+
+ 
+/*printf("value of input of B_1_2 is %f \n",B_1_2.input_H1) ;
+printf("value of input of B_2_2 is %f \n",B_2_2.input_H1) ;
+printf("value of input of B_3_2 is %f \n",B_3_2.input_H1) ; */
+
+//2nd hidden layer//
+B_1_2.mac_out_H1 = activation(B_1_2.input_H1);
+B_2_2.mac_out_H1 = activation(B_2_2.input_H1);
+B_3_2.mac_out_H1 = activation(B_3_2.input_H1);
+
+C_1_3.input_H2 = activation(B_1_2.input_H1) + activation(B_2_2.input_H1) + activation(B_3_2.input_H1) ;
+C_2_3.input_H2 = activation(B_1_2.input_H1) + activation(B_2_2.input_H1) + activation(B_3_2.input_H1) ;
+C_3_3.input_H2 = activation(B_1_2.input_H1) + activation(B_2_2.input_H1) + activation(B_3_2.input_H1) ;
+ 
+C_1_3.mac_out_H2 = activation(C_1_3.input_H2) ;
+C_2_3.mac_out_H2 = activation(C_2_3.input_H2) ;
+C_3_3.mac_out_H2 = activation(C_3_3.input_H2) ;
+
+printf("final value C_1_3 is %f \n",C_1_3.mac_out_H2) ;
+printf("final value C_2_3 is %f \n",C_2_3.mac_out_H2) ;
+printf("final value C_3_3  is %f \n",C_3_3.mac_out_H2) ;
+
+fprintf(output_sigmoid_activation,"final value C_1_3 is : %f\n",C_1_3.mac_out_H2);
+fprintf(output_sigmoid_activation,"final value C_2_3 is : %f\n",C_2_3.mac_out_H2);
+fprintf(output_sigmoid_activation,"final value C_3_3 is : %f\n",C_3_3.mac_out_H2);
+
+}
+}
+
+if(act == 2)
+ {
+ FILE * output_pade;
+output_pade = fopen("output_pade.txt", "w+");
+ 
+FILE * fp;
+fp = fopen("input.txt", "w+");
+printf("enter number of times you want input");
+int times;
+scanf("%d",&times);
+ float X1,X2,X3;
+int l_l;
+for(l_l=0;l_l<times;l_l++)
+{	
+scanf("%f",&A_1_1.input);
+ scanf("%f",&A_2_1.input);
+ scanf("%f",&A_3_1.input);
+
+fprintf(fp,"%f,%f,%f \n",A_1_1.input,A_2_1.input,A_3_1.input);
+
+}
+fclose(fp);
+fp = fopen("input.txt", "r");
+while(fscanf(fp,"%f,%f,%f \n",&X1,&X2,&X3) != EOF)
+{
+
+A_1_1.input = X1;
+A_2_1.input = X2;
+A_3_1.input = X3;
+
+printf("value of input at neuron A_1_1 is : %f \n",A_1_1.input) ; 
+printf("value of input at neuron A_2_1 is : %f \n",A_2_1.input) ; 
+printf("value of input at neuron A_3_1 is : %f \n",A_3_1.input) ; 
+ 
+ 
+ B_1_2.input_H1 = pade(A_1_1.input) + pade(A_2_1.input) + pade(A_3_1.input) ;
+ B_2_2.input_H1 = pade(A_1_1.input) + pade(A_2_1.input) + pade(A_3_1.input) ;
+ B_3_2.input_H1 = pade(A_1_1.input) + pade(A_2_1.input) + pade(A_3_1.input) ;
+ 
+
+ fprintf(output_pade,"value of input at neuron A_1_1 is :%f\n",A_1_1.input);
+fprintf(output_pade," value of input at neuron A_2_1 is :%f\n",A_2_1.input);
+fprintf(output_pade,"value of input at neuron A_3_1 is :%f\n",A_3_1.input);
+
+/*printf("value of input of B_1_2 is %f \n",B_1_2.input_H1) ;
+printf("value of input of B_2_2 is %f \n",B_2_2.input_H1) ;
+printf("value of input of B_3_2 is %f \n",B_3_2.input_H1) ; */
+
+//2nd hidden layer//
+B_1_2.mac_out_H1 = pade(B_1_2.input_H1);
+B_2_2.mac_out_H1 = pade(B_2_2.input_H1);
+B_3_2.mac_out_H1 = pade(B_3_2.input_H1);
+
+C_1_3.input_H2 = pade(B_1_2.input_H1) + pade(B_2_2.input_H1) + pade(B_3_2.input_H1) ;
+C_2_3.input_H2 = pade(B_1_2.input_H1) + pade(B_2_2.input_H1) + pade(B_3_2.input_H1) ;
+C_3_3.input_H2 = pade(B_1_2.input_H1) + pade(B_2_2.input_H1) + pade(B_3_2.input_H1) ;
+ 
+C_1_3.mac_out_H2 = pade(C_1_3.input_H2) ;
+C_2_3.mac_out_H2 = pade(C_2_3.input_H2) ;
+C_3_3.mac_out_H2 = pade(C_3_3.input_H2) ;
+
+printf("final value C_1_3 is %f \n",C_1_3.mac_out_H2) ;
+printf("final value C_2_3 is %f \n",C_2_3.mac_out_H2) ;
+printf("final value C_3_3  is %f \n",C_3_3.mac_out_H2) ;
+
+fprintf(output_pade,"final value C_1_3 is : %f\n",C_1_3.mac_out_H2);
+fprintf(output_pade,"final value C_2_3 is : %f\n",C_2_3.mac_out_H2);
+fprintf(output_pade,"final value C_3_3 is : %f\n",C_3_3.mac_out_H2);
+
+}
+}
+
+
+
+}

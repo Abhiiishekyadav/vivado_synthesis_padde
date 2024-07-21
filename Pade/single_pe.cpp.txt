@@ -1,0 +1,27 @@
+// Include HLS Math Lib to use calculate exponential function
+#include "hls_math.h"
+
+// This is the top function defined during project initialization
+int hand_num_nn(float X[10],float Y[10], bool EN){
+	/*Define PRAGMA
+	 * Input is taken form port X via BRAM
+	 * AXI_LITE Interface is used to control IP core
+	 */
+
+#pragma HLS INTERFACE s_axilite port=return bundle=CTRL_BUS
+#pragma HLS INTERFACE s_axilite port=y bundle=CTRL_BUS
+#pragma HLS INTERFACE bram port=X
+int i = 0;
+
+          if(EN)
+{
+       for(i=0;i<9;i++)
+{
+
+		Y[i] = 1.0/(1.0 + hls::exp(-1*X[i]));
+
+		
+
+	return Y[i];
+}
+}

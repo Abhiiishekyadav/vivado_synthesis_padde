@@ -1,0 +1,57 @@
+// Include HLS Math Lib to use calculate exponential function
+#include "hls_math.h"
+
+
+const   int N = 3;
+const   int M = 5;
+float sum ;
+
+
+ //This is the top function defined during project initialization
+void  NN_1(float *Y,bool EN,float *X ){
+sum =0;
+ if(EN)
+{
+    for(int j=1;j<=M;j++)
+{
+
+//Y[j] = 1.0/(1.0 + hls::exp(-1*X[j]));
+    Y[j] = 1.0/(1.0 + pow(2.7,(-1*X[j])));
+}
+
+
+}
+
+for(int j=1;j<=M;j++)
+{
+#pragma HLS Pipeline off
+
+    sum  = sum + Y[j]  ;
+
+}
+
+}
+//////////////////////////////////////////////////////////////////////////
+void NN_2(float &Y1,bool EN1,float &Z1,float &sum ){
+sum =0;
+
+ if(EN1)
+{
+//Y1 = 1.0/(1.0 + hls::exp(-1*sum));
+Y1 = 1.0/(1.0 + pow(2.7,(-1*sum)));
+   Z1 = Y1  ;   // final output
+}
+}
+
+//////////////////////////////////////////////////////////////////////////////
+void top_function(float Y1,bool EN,bool EN1, float *X  ,float Z1, float sum, float *Y){
+sum =0;
+NN_1 (Y,EN,X);
+
+
+for (int j= 0; j<= M; j++){
+sum += Y[j];
+
+}
+NN_2(Y1,EN1,Z1,sum);
+}

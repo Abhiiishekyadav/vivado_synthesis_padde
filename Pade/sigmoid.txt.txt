@@ -1,0 +1,30 @@
+value of input at neuron A_1_1 is : 2.000000
+value of input at neuron A_2_1 is : 1.000000
+value of input at neuron A_3_1 is : 0.000000
+final value C_1_3 is : 0.586378
+final value C_2_3 is : 0.586378
+final value C_3_3 is : 0.586378
+value of input at neuron A_1_1 is : 1.000000
+value of input at neuron A_2_1 is : 1.000000
+value of input at neuron A_3_1 is : 1.000000
+final value C_1_3 is : 0.586385
+final value C_2_3 is : 0.586385
+final value C_3_3 is : 0.586385
+value of input at neuron A_1_1 is : 2.000000
+value of input at neuron A_2_1 is : 2.000000
+value of input at neuron A_3_1 is : 2.000000
+final value C_1_3 is : 0.587420
+final value C_2_3 is : 0.587420
+final value C_3_3 is : 0.587420
+value of input at neuron A_1_1 is : 3.000000
+value of input at neuron A_2_1 is : 3.000000
+value of input at neuron A_3_1 is : 3.000000
+final value C_1_3 is : 0.588409
+final value C_2_3 is : 0.588409
+final value C_3_3 is : 0.588409
+value of input at neuron A_1_1 is : 4.000000
+value of input at neuron A_2_1 is : 4.000000
+value of input at neuron A_3_1 is : 4.000000
+final value C_1_3 is : 0.589337
+final value C_2_3 is : 0.589337
+final value C_3_3 is : 0.589337
