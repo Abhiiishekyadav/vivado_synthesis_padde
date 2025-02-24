@@ -7,7 +7,10 @@ This repository contains a Vitis-HLS-based C++ implementation of basic MLP (Mult
 2. **padde.cpp**: Implements a Pade-based approximation of an ANN block.
     The corresponding header file is `padde.h`, while `mnist.h` includes MNIST dataset weights and activation functions. All pragma directives are detailed in `pragma.cpp`.
 
-3. **Pade** repository consist of cpp implementation of various floating point, PEs block, full architecture etc.   
+3. **Pade** repository consist of cpp implementation of various floating point, PEs block, full architecture etc.
+
+PAPER LINK:
+https://ieeexplore.ieee.org/document/10884498
 
 
 Feel free to reach on below email-id in case of any query:yadav.49@iitj.ac.in, m23eev006@iitj.ac.in
